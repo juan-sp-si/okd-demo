@@ -1,0 +1,10 @@
+kind: "BuildConfig"
+apiVersion: "v1"
+metadata:
+  name: "okd-pipeline-demo"
+spec:
+  source:
+    git:
+      uri: "https://github.com/juan-sp-si/okd-demo"
+  strategy:
+    jenkinsPipelineStrategy
