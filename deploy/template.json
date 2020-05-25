@@ -225,7 +225,7 @@
             "displayName": "Namespace",
             "description": "The OpenShift Namespace where the ImageStream resides.",
             "required": true,
-            "value": "openshift"
+            "value": "demo"
         },
         {
             "name": "NODEJS_VERSION",
