@@ -144,7 +144,7 @@
                             ],
                             "from": {
                                 "kind": "ImageStreamTag",
-                                "name": "${NAME}:latest"
+                                "name": "${NAME}:${VERSION}"
                             }
                         }
                     },
