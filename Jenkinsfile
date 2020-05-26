@@ -38,6 +38,9 @@ pipeline {
         stage('create') {
             steps {
                 script {
+                    echo "Creating ${templateName} from ${templatePath}"
+                },
+                script {
                     openshift.withCluster() {
                         openshift.withProject() {
                             openshift.newApp(templatePath)
