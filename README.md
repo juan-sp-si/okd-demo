@@ -3,7 +3,6 @@
 This is an example project to demostrate how to run a very simple pipeline using OKD and Github.
 
 ```bash
-# crear proyecto
 oc new-project demo
 oc project demo
 oc new-app jenkins-ephemeral
@@ -13,8 +12,6 @@ oc create secret generic github-ssh \
     --type=kubernetes.io/ssh-auth
 
 oc secrets link builder github-ssh
-
-# crear pipeline
 
 oc create -f deploy/demo-pipeline.yaml
 
