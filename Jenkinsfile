@@ -26,9 +26,20 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
-                            openshift.selector("all", [ template : templateName ]).delete() 
-                            if (openshift.selector("secrets", templateName).exists()) { 
-                                openshift.selector("secrets", templateName).delete()
+                            if (openshift.selector("service", templateName).exists()) { 
+                                openshift.selector("service", templateName).delete()
+                            }
+
+                            if (openshift.selector("route", templateName).exists()) { 
+                                openshift.selector("route", templateName).delete()
+                            }
+
+                            if (openshift.selector("deploymentconfig", templateName).exists()) { 
+                                openshift.selector("deploymentconfig", templateName).delete()
+                            }
+
+                            if (openshift.selector("imagestream", templateName).exists()) { 
+                                openshift.selector("imagestream", templateName).delete()
                             }
                         }
                     }
