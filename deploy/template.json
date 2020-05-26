@@ -2,7 +2,7 @@
     "kind": "Template",
     "apiVersion": "v1",
     "metadata": {
-        "name": "okd-demo",
+        "name": "okd-pipeline-demo",
         "annotations": {
             "openshift.io/display-name": "OKD Pipeline demo",
             "description": "A simple example on how to use Openshift Pipeline.",
@@ -13,8 +13,8 @@
     },
     "message": "The following service(s) have been created in your project: ${NAME}, ${DATABASE_SERVICE_NAME}.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/sclorg/nodejs-ex/blob/master/README.md.",
     "labels": {
-        "template": "okd-pipeline-demo-app",
-        "app": "okd-pipeline-demo-app"
+        "template": "okd-pipeline-demo",
+        "app": "okd-pipeline-demo"
     },
     "objects": [
         {
