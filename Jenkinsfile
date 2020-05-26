@@ -43,7 +43,7 @@ pipeline {
                             }
                             
                             if (openshift.selector("buildconfig", templateName).exists()) { 
-                                openshift.selector("imagestream", templateName).delete()
+                                openshift.selector("buildconfig", templateName).delete()
                             }
                         }
                     }
