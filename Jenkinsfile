@@ -15,7 +15,7 @@ pipeline {
                 script {
                     openshift.withCluster() {
                         openshift.withProject() {
-                            echo "Using project: ${openshift.project()}"
+                            echo "Deploy app to project: ${openshift.project()}"
                         }
                     }
                 }
@@ -72,22 +72,6 @@ pipeline {
                             timeout(5) { 
                                 builds.untilEach(1) {
                                     return (it.object().status.phase == "Complete")
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        stage('deploy') {
-            steps {
-                script {
-                    openshift.withCluster() {
-                        openshift.withProject() {
-                            def rm = openshift.selector("dc", templateName).rollout().latest()
-                            timeout(5) { 
-                                openshift.selector("dc", templateName).related('pods').untilEach(1) {
-                                    return (it.object().status.phase == "Running")
                                 }
                             }
                         }
