@@ -2,7 +2,7 @@
     "kind": "Template",
     "apiVersion": "v1",
     "metadata": {
-        "name": "okd-pipeline-demo",
+        "name": "okd-demo",
         "annotations": {
             "openshift.io/display-name": "OKD Pipeline demo",
             "description": "A simple example on how to use Openshift Pipeline.",
@@ -11,10 +11,10 @@
             "template.openshift.io/bindable": "false"
         }
     },
-    "message": "The following service(s) have been created in your project: ${NAME}, ${DATABASE_SERVICE_NAME}.\n\nFor more information about using this template, including OpenShift considerations, see https://github.com/sclorg/nodejs-ex/blob/master/README.md.",
+    "message": "Hi this is a samlple pipline a Service,Roiute,DeploymentConfig & ImageStream with the name ${NAME} have been created",
     "labels": {
-        "template": "okd-pipeline-demo",
-        "app": "okd-pipeline-demo"
+        "template": "okd-demo",
+        "app": "okd-demo"
     },
     "objects": [
         {
@@ -65,6 +65,72 @@
             }
         },
         {
+            "kind": "BuildConfig",
+            "apiVersion": "v1",
+                "metadata": {
+                    "name": "${NAME}",
+                    "annotations": {
+                        "description": "Defines how to build the application",
+                        "template.alpha.openshift.io/wait-for-ready": "true"
+                    }
+                },
+            "spec": {
+                "source": {
+                    "type": "Git",
+                    "git": {
+                        "uri": "${SOURCE_REPOSITORY_URL}",
+                        "ref": "${SOURCE_REPOSITORY_REF}"
+                    },
+                    "contextDir": "${CONTEXT_DIR}"
+                },
+                "strategy": {
+                    "type": "Source",
+                    "sourceStrategy": {
+                        "from": {
+                            "kind": "ImageStreamTag",
+                            "namespace": "${NAMESPACE}",
+                            "name": "nodejs:${NODEJS_VERSION}"
+                        },
+                        "env": [
+                            {
+                                "name": "NPM_MIRROR",
+                                "value": "${NPM_MIRROR}"
+                            }
+                        ]
+                    }
+                },
+                "output": {
+                    "to": {
+                        "kind": "ImageStreamTag",
+                        "name": "${NAME}:latest"
+                    }
+                },
+                "triggers": [
+                    {
+                        "type": "ImageChange"
+                    },
+                    {
+                        "type": "ConfigChange"
+                    },
+                    {
+                        "type": "GitHub",
+                        "github": {
+                            "secret": "${GITHUB_WEBHOOK_SECRET}"
+                        }
+                    },
+                    {
+                        "type": "Generic",
+                        "generic": {
+                            "secret": "${GENERIC_WEBHOOK_SECRET}"
+                        }
+                    }
+                ],
+                "postCommit": {
+                    "script": "npm test"
+                }
+            }
+        },
+        {
             "kind": "DeploymentConfig",
             "apiVersion": "v1",
             "metadata": {
@@ -84,7 +150,7 @@
                         "imageChangeParams": {
                             "automatic": true,
                             "containerNames": [
-                                "okd-pipeline-demo"
+                                "okd-demo"
                             ],
                             "from": {
                                 "kind": "ImageStreamTag",
@@ -110,7 +176,7 @@
                     "spec": {
                         "containers": [
                             {
-                                "name": "okd-pipeline-demo",
+                                "name": "okd-demo",
                                 "image": " ",
                                 "ports": [
                                     {
@@ -151,7 +217,7 @@
             "displayName": "Name",
             "description": "The name assigned to all of the frontend objects defined in this template.",
             "required": true,
-            "value": "okd-pipeline-demo"
+            "value": "okd-demo"
         },
         {
             "name": "NAMESPACE",
