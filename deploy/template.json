@@ -258,7 +258,7 @@
             "name": "APPLICATION_DOMAIN",
             "displayName": "Application Hostname",
             "description": "The exposed hostname that will route to the Node.js service, if left blank a value will be defaulted.",
-            "value": "okd-demo"
+            "value": "okd-demo.192.168.64.4.nip.io"
         },
         {
             "name": "GITHUB_WEBHOOK_SECRET",
