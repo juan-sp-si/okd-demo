@@ -84,25 +84,15 @@
                     "contextDir": "${CONTEXT_DIR}"
                 },
                 "strategy": {
-                    "type": "Source",
-                    "sourceStrategy": {
-                        "from": {
-                            "kind": "ImageStreamTag",
-                            "namespace": "${NAMESPACE}",
-                            "name": "${NAME}:latest"
-                        },
-                        "env": [
-                            {
-                                "name": "NPM_MIRROR",
-                                "value": "${NPM_MIRROR}"
-                            }
-                        ]
+                    "type": "Docker",
+                    "dockerStrategy": {
+                        "dockerfilePath": "Dockerfile"
                     }
                 },
                 "output": {
                     "to": {
                         "kind": "ImageStreamTag",
-                        "name": "${NAME}:latest"
+                        "name": "${NAME}${VERSION}"
                     }
                 },
                 "triggers": [
@@ -252,6 +242,12 @@
             "displayName": "Git Reference",
             "description": "Set this to a branch name, tag or other ref of your repository if you are not using the default branch.",
             "value": "master"
+        },
+        {
+            "name": "VERSION",
+            "displayName": "Tag Version",
+            "description": "Set this to the version you want the image tagged as",
+            "value": "v1.0.0"
         },
         {
             "name": "CONTEXT_DIR",
