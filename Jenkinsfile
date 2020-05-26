@@ -55,6 +55,7 @@ pipeline {
                             openshift.newApp(templatePath)
                         }
                     }
+                    echo "Created ${templateName}"
                 }
             }
         }
@@ -85,17 +86,6 @@ pipeline {
                                     return (it.object().status.phase == "Running")
                                 }
                             }
-                        }
-                    }
-                }
-            }
-        }
-        stage('tag') {
-            steps {
-                script {
-                    openshift.withCluster() {
-                        openshift.withProject() {
-                            openshift.tag("${templateName}:latest", "${templateName}-staging:latest") 
                         }
                     }
                 }
