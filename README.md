@@ -13,7 +13,7 @@ oc create secret generic github-ssh \
 
 oc secrets link builder github-ssh
 
-oc create -f deploy/demo-pipeline.yaml
+oc apply -f deploy/demo-pipeline.yaml
 
 oc start-build okd-pipeline-demo
 ```
