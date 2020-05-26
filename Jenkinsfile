@@ -1,5 +1,4 @@
-//def templatePath = 'https://raw.githubusercontent.com/juan-sp-si/okd-demo/master/deploy/template.json' 
-def templatePath = 'deploy/template.json' 
+def templatePath = 'https://raw.githubusercontent.com/juan-sp-si/okd-demo/master/deploy/template.json' 
 def templateName = 'okd-pipeline-demo' 
 pipeline {
     agent {
@@ -39,11 +38,11 @@ pipeline {
         stage('create') {
             steps {
                 script {
-                        openshift.withCluster() {
-                                openshift.withProject() {
-                                    openshift.newApp(templatePath) 
-                                }
+                    openshift.withCluster() {
+                        openshift.withProject() {
+                            openshift.newApp(templatePath)
                         }
+                    }
                 }
             }
         }
