@@ -1,4 +1,4 @@
-def templatePath = 'https://raw.githubusercontent.com/juan-sp-si/okd-demo/master/deploy/template.json' 
+def templatePath = './deploy/template.json' 
 def templateName = 'okd-demo' 
 pipeline {
     agent {
