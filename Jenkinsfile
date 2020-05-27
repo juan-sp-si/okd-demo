@@ -1,4 +1,4 @@
-def templatePath = './deploy/template.json' 
+def templatePath = './deploy/template.yaml' 
 def templateName = 'okd-demo' 
 pipeline {
     agent {
