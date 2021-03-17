@@ -1,4 +1,4 @@
-FROM node:12
+FROM node:erbium-buster-slim
 WORKDIR /usr/src/app
 COPY package.json ./
 RUN npm install
